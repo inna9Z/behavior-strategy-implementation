@@ -18,7 +18,7 @@ for (const solution of [secretSolution]) {
   describe(solution.name + ': determines if a value is truthy', () => {
     describe('solution can identify truthy values', () => {
       it('non-empty strings -> true', () => {
-        const actual = solution(_);
+        const actual = solution('hi', 'hi');
         expect(actual).toEqual(true);
       });
       it('numbers that are not 0 or NaN -> true', () => {

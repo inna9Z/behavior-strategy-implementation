@@ -1,3 +1,5 @@
+/* eslint-disable padded-blocks */
+/* eslint-disable no-restricted-syntax */
 // #todo
 
 'use strict';
@@ -11,7 +13,25 @@
 
 // -------- your solutions --------
 
-for (const solution of [secretSolution]) {
+function mySolution(max = 0) {
+  if (typeof max !== 'number') {
+    throw new TypeError();
+  }
+  if (max < 0) {
+    throw new RangeError();
+  }
+  if (!Number.isInteger(max)) {
+    throw new Error();
+  }
+  const result = [];
+  for (let i = 0; i <= max; i++) {
+    result.push(i);
+    
+  }
+  return result;
+}
+
+for (const solution of [secretSolution, mySolution]) {
   // the main test suite for the function
   describe(solution.name + ': counts up from 0', () => {
     it('default parameter is 0 -> [0]', () => {
@@ -23,6 +43,21 @@ for (const solution of [secretSolution]) {
     });
     it('1 -> [0, 1]', () => {
       expect(solution(1)).toEqual([0, 1]);
+    });
+    it('2 -> [0, 1, 2]', () => {
+      expect(solution(2)).toEqual([0, 1, 2]);
+    });
+    it('3 -> [0, 1, 2, 3]', () => {
+    expect(solution(3)).toEqual([0, 1, 2, 3]);
+    });
+    it('4 -> [0, 1, 2, 3, 4]', () => {
+      expect(solution(4)).toEqual([0, 1, 2, 3, 4]);
+    });
+    it('should throw Error when count not start from 0', () => {
+      expect(() => solution(-1)).toThrow(Error);
+    });
+    it('should throw Error when count not start from 0', () => {
+      expect(() => solution(-5)).toThrow(Error);
     });
     // write at least 5 more tests ...
   });

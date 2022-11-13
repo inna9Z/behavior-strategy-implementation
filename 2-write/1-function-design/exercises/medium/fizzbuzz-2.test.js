@@ -1,3 +1,4 @@
+/* eslint-disable */
 // #todo
 
 'use strict';
@@ -15,12 +16,14 @@
 
 // -------- your solutions --------
 
-const whileLoop = (max) => {
-  let countUp = _;
+const whileLoop = (max = 0) => {
+  let countUp = 0;
   const result = [];
-  while (_) {
-    const nextEntry = countUp % 15 === 0 ? '_' : _ ? 'buzz' : _ ? 'fizz' : _;
+  while (countUp < max) {
+    const nextEntry = countUp % 15 === 0 ? 'fizzbuzz' : 5 ? 'buzz' : 3 ? 'fizz' : countUp;
+  
     result.push(nextEntry);
+   countUp ++;
   }
   return result;
 };
@@ -29,8 +32,10 @@ const whileLoop = (max) => {
  */
 const oneLineforLoop = (max) => {
   const result = [];
-  for (let i = 0; i < _; )
-    result._((++i % _ ? '' : '_') + (i % _ ? '' : '_') || i);
+  for (let i = 0; i < max; i++) {
+    result.max((i % 5 ? '' : 'buzz') + (i % 3 ? '' : 'fizz') || i);
+  }
+   
   return result;
 
   // https://codeburst.io/javascript-breaking-down-the-shortest-possible-fizzbuzz-answer-94a0ad9d128a
@@ -39,16 +44,16 @@ const oneLineforLoop = (max) => {
 /* describe this solution's strategy
  */
 const manySmallFunctions = (max) => {
-  const threeDivides = (n) => n % _ === 0;
-  const fiveDivides = (n) => n % _ === 0;
-  const fifteenDivides = (n) => n % _ === 0;
+  const threeDivides = (n) => n % 3 === 0;
+  const fiveDivides = (n) => n % 5 === 0;
+  const fifteenDivides = (n) => n % 15 === 0;
 
   const fizzbuzzOrNumber = (num) => {
-    if (_) {
+    if (fifteenDivides) {
       return 'fizzbuzz';
-    } else if (_) {
+    } else if (threeDivides) {
       return 'fizz';
-    } else if (_) {
+    } else if (fiveDivides) {
       return 'buzz';
     } else {
       return num;
@@ -57,7 +62,7 @@ const manySmallFunctions = (max) => {
 
   // https://stackoverflow.com/a/33352604
   const arrayOfIndexes = [...Array(max).keys()];
-  const fizzBuzzedArray = arrayOfIndexes.map(_);
+  const fizzBuzzedArray = arrayOfIndexes.map(fizzbuzzOrNumber());
   return fizzBuzzedArray;
 };
 
@@ -65,9 +70,9 @@ const manySmallFunctions = (max) => {
 
 for (const solution of [
   secretSolution,
-  // whileLoop,
+  //whileLoop,
   // oneLineforLoop,
-  // manySmallFunctions,
+   //manySmallFunctions,
 ]) {
   describe(solution.name + ': fizzbuzz', () => {
     describe('numbers divisible by 3', () => {
@@ -75,16 +80,65 @@ for (const solution of [
         expect(solution(3)).toEqual(['fizzbuzz', 1, 2]);
       });
       // write more of these
+      it('4 should return an array with the first 4 values', () => {
+        expect(solution(4)).toEqual(['fizzbuzz', 1, 2, 'fizz']);
+      });
+      it('5 should return an array with the first 5 values', () => {
+        expect(solution(5)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4]);
+      });
+      it('6 should return an array with the first 6 values', () => {
+        expect(solution(6)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz']);
+      });
+      it('7 should return an array with the first 7 values', () => {
+        expect(solution(7)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz', 'fizz']);
+      });
+      it('8 should return an array with the first 8 values', () =>{
+        expect(solution(8)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz', 'fizz', 7]);
+      });
+      it('9 should return an array with the first 9 values', () => {
+        expect(solution(9)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz', 'fizz', 7, 8]);
+      });
+      it('10 should return an array with the first 10 values', () => {
+        expect(solution(10)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz', 'fizz', 7, 8, 'fizz']);
+      });
     });
     describe('numbers divisible by neither 3 nor 5', () => {
       it('4 should return an array with the first 4 values', () => {
         expect(solution(4)).toEqual(['fizzbuzz', 1, 2, 'fizz']);
       });
       // write more of these
+      it('5 should return an array with the first 5 values', () => {
+        expect(solution(5)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4]);
+      });
+      it('6 should return an array with the first 6 values', () => {
+        expect(solution(6)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz']);
+      });
+      it('7 should return an array with the first 7 values', () => {
+        expect(solution(7)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz', 'fizz', ]);
+      });
+      it('8 should return an array with the first 8 values', () => {
+        expect(solution(8)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz', 'fizz', 7]);
+      });
     });
+    
     describe('numbers divisible by 5', () => {
       it('5 should return an array with the first 5 values', () => {
         expect(solution(5)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4]);
+      });
+      it('6 should return an array with the first 5 values', () => {
+        expect(solution(6)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz']);
+      });
+      it ('7 should return an array with the first 5 values', () => {
+       expect(solution(7)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz', 'fizz']);
+      });
+      it ('8 should return an array with the first 8 values', () => {
+        expect(solution(8)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz', 'fizz', 7]);
+      });
+      it ('9 should return an array with the first 9 values', () => {
+        expect(solution(9)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz', 'fizz', 7, 8]);
+      });
+      it ('10 should return an array with the first 10 values', () => {
+        expect(solution(10)).toEqual(['fizzbuzz', 1, 2, 'fizz', 4, 'buzz', 'fizz', 7, 8, 'fizz']);
       });
       // write more of these
     });

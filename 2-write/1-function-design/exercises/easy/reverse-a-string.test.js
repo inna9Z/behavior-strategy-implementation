@@ -1,3 +1,6 @@
+
+/* eslint-disable*/
+/* eslint-disable prefer-template */
 // #todo
 
 'use strict';
@@ -9,9 +12,18 @@
  */
 
 // -------- your solutions --------
-
-for (const solution of [secretSolution]) {
+ function mySolution(toRevers = '') {
+   if (typeof toRevers !== 'string') {
+     throw new TypeError();
+   }
+ 
+   return toRevers.split('').reverse().join('');
+ }
+ 
+// eslint-disable-next-line no-restricted-syntax
+for (const solution of [secretSolution, mySolution]) {
   // the main test suite for the function
+  // eslint-disable-next-line no-loop-func
   describe(solution.name + ': reverses a string', () => {
     it('default parameter is an empty string -> ""', () => {
       expect(solution()).toEqual('');
@@ -22,6 +34,17 @@ for (const solution of [secretSolution]) {
     it('a string with all capital letters', () => {
       expect(solution('ASDF')).toEqual('FDSA');
     });
+    it('a string with one capital letter', () => {
+    expect(solution('Hello')).toEqual('olleH');
+    });
+    it('should throw Error when user enter number', () => {
+      expect(() => solution(1)).toThrow(Error);
+    });
+    it('a string with two capital letter', () => {
+      expect(solution('HEllo')).toEqual('ollEH')
+    });
+    
+    
     // write at least 5 more tests ...
   });
 }

@@ -1,3 +1,5 @@
+/* eslint-disable strict */
+/* eslint-disable no-use-before-define */
 // #todo
 
 'use strict';
@@ -10,9 +12,28 @@
  */
 
 // -------- your solutions --------
+function countDown(start = 0) {
+  if (typeof start !== 'number') {
+    throw new TypeError();
+  }
+  if (start < 0) {
+    throw new Error();
+  }
+  if (!Number.isInteger(start)) {
+    throw new Error();
+  }
 
-for (const solution of [secretSolution]) {
+  const result = [];
+  for (let i = start; i >= 0; i--) {
+    result.push(i);
+  }
+  return result;
+}
+
+// eslint-disable-next-line no-restricted-syntax
+for (const solution of [secretSolution, countDown]) {
   // the main test suite for the function
+  // eslint-disable-next-line prefer-template
   describe(solution.name + ': counts down to 0', () => {
     it('default parameter is 0 -> [0]', () => {
       expect(solution()).toEqual([0]);
@@ -23,6 +44,19 @@ for (const solution of [secretSolution]) {
     it('1 -> [1, 0]', () => {
       expect(solution(1)).toEqual([1, 0]);
     });
+    it('2 -> [2, 1, 0]', () => {
+      expect(solution(2)).toEqual([2, 1, 0]);
+    });
+    it('3 -> [3, 2, 1, 0]', () => {
+      expect(solution(3)).toEqual([3, 2, 1, 0]);
+    });
+    it('throws an error when is not start from 0', () => {
+      expect(() => solution(-2)).toThrow(Error);
+    });
+    it('throws an error when in not a number', () => {
+      expect(() => solution('a')).toThrow(Error);
+    });
+
     // write at least 5 more tests ...
   });
 }
